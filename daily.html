@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Countdown to Your Special Day ❤️</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #0a0a0a;
+      color: #ffd6f4;
+      font-family: 'Montserrat', sans-serif;
+      text-align: center;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    h1, h2, h3 {
+      font-family: 'Dancing Script', cursive;
+    }
+
+    .container {
+      max-width: 800px;
+      width: 95%;
+      margin: 2rem auto;
+      padding: 2rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    header {
+      margin-bottom: 2rem;
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+      color: #ff6bdf;
+    }
+
+    #countdown {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin: 2rem 0;
+      flex-wrap: wrap;
+    }
+
+    #countdown div {
+      background: rgba(255, 107, 223, 0.15);
+      border-radius: 10px;
+      padding: 1rem;
+      min-width: 80px;
+    }
+
+    #countdown span {
+      display: block;
+      font-size: 2rem;
+      font-weight: 600;
+      color: #ff6bdf;
+    }
+
+    .polaroid {
+      background: white;
+      padding: 1rem 1rem 2rem;
+      width: 90%;
+      max-width: 400px;
+      margin: 2rem auto;
+      transform: rotate(-2deg);
+      box-shadow: 0 10px 20px rgba(255, 107, 223, 0.3);
+    }
+
+    #daily-image {
+      width: 100%;
+      height: 550px;
+      object-fit: cover;
+    }
+
+    #daily-message {
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.5rem;
+      color: #d14d9f;
+      margin-top: 1rem;
+    }
+
+    footer {
+      margin-top: 2rem;
+      color: rgba(255, 214, 244, 0.7);
+    }
+
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 2rem;
+      }
+      
+      #countdown div {
+        min-width: 70px;
+        padding: 0.8rem;
+      }
+      
+      #countdown span {
+        font-size: 1.5rem;
+      }
+    }
+  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Every Day Counts Until Your Day ❤️</h1>
+      <p>The wait will be worth it, beautiful</p> <br>
+      <span><p>Advance happy birthday di loosu  🎈 ⭐</p> </span>
+    </header>
+
+    <div id="countdown">
+      <div><span id="days">00</span>Days</div>
+      <div><span id="hours">00</span>Hours</div>
+      <div><span id="minutes">00</span>Minutes</div>
+      <div><span id="seconds">00</span>Seconds</div>
+    </div>
+
+    <div class="polaroid">
+      <img id="daily-image" src="she6.jpg" alt="Today's Memory">
+      <p id="daily-message"></p>
+    </div>
+
+    <footer>
+      Made with ❤️ for someone special
+    </footer>
+  </div>
+
+  <script>
+    // SET YOUR TARGET DATE HERE (Year, Month-1, Day, Hour, Minute)
+    // Example: June 15, 2024 at 00:00 would be new Date(2024, 5, 15)
+  const TARGET_DATE = new Date(2025, 7, 21, 0, 0, 0);    
+    // Romantic messages
+    const MESSAGES = [
+      "Your smile makes every day brighter ❤️",
+      "The world became more beautiful when you were born",
+      "Counting down to the day we celebrate you!",
+      "Stars shine brighter thinking of your birthday",
+      "Every moment with you is precious"
+    ];
+
+    // Update countdown timer
+    function updateCountdown() {
+      const now = new Date();
+      const diff = TARGET_DATE - now;
+
+      if (diff <= 0) {
+        // When countdown ends, show celebration and redirect
+        document.getElementById("countdown").innerHTML = `
+          <div style="font-size: 2rem; grid-column: 1 / -1;">
+            🎉 Happy Birthday! 🎉
+          </div>`;
+        clearInterval(countdownInterval);
+        setTimeout(() => {
+          window.location.href = "birthday.html";
+        }, 2000);
+        return;
+      }
+
+      const totalSeconds = Math.floor(diff / 1000);
+      const days = Math.floor(totalSeconds / (3600 * 24));
+      const hours = Math.floor((totalSeconds % (3600 * 24)) / 3600);
+      const minutes = Math.floor((totalSeconds % 3600) / 60);
+      const seconds = Math.floor(totalSeconds % 60);
+
+      document.getElementById("days").textContent = days.toString().padStart(2, '0');
+      document.getElementById("hours").textContent = hours.toString().padStart(2, '0');
+      document.getElementById("minutes").textContent = minutes.toString().padStart(2, '0');
+      document.getElementById("seconds").textContent = seconds.toString().padStart(2, '0');
+    }
+
+    // Set random message
+    function setDailyMessage() {
+      const randomMessage = MESSAGES[Math.floor(Math.random() * MESSAGES.length)];
+      document.getElementById("daily-message").textContent = randomMessage;
+    }
+
+    // Initialize
+    updateCountdown();
+    setDailyMessage();
+    const countdownInterval = setInterval(updateCountdown, 1000);
+  </script>
+</body>
+</html>
